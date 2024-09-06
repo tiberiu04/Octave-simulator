@@ -1,0 +1,183 @@
+# Copyright Tiberiu-Mihnea Gutanu 311CAa 2023-2024
+
+# Fisiere header
+
+alloc_array.h: aloca dinamic in doi vectori v si u numerele m si n care
+reprezinta dimensiunile matricii
+
+command_D.h: afiseaza dimensiunile celei de a nr matrici din memorie,
+in caz de nu exista o a nr matrice se afiseaza "No matrix with the given index"
+
+command_P.h: afiseaza cea de-a nr matrice, in caz de nu exista se afiseaza
+acelasi mesaj ca la command_D.h si anume "No matrix with the given index"
+
+allocatematrix.h: aloca dinamic in memorie o matrice de dimensiuni m si n
+
+readmatrix.h: are rolul de a citi matricea
+
+freematrix.h: are rolul de a elibera din memorie o matrice 2D.
+
+callocatematrix.h: aloca in memorie o matrice initializata cu 0.
+
+read_vec.h: se aloca dinamic un vector si apoi este citit de la tastatura
+
+command_C.h: contine un subprogram care citeste m1 si n1 si m1 indecsi pentru
+linii si n1 indecsi pentru coloane care sa se regaseasca in matricea noua.
+Verific intai daca matricea pentru care se doreste redimensionarea exista.
+Daca nu, afisez "No matrix with the given index".
+Daca exista, aloc dinamic o matrice temporara temp de dimensiuni m1 si n1
+care va contine elementele din matricea initiala dupa vectorii cititi.
+Eliberez din memorie matricea initiala si o initializez cu matricea temp,
+urmand apoi sa o eliberez din memorie.
+
+suma.h: calculeaza suma unei matrici
+
+swapmatrices.h: aici se afla un subprogram in care se realizeaza dinamic
+interschimbarea a doua matrici
+
+sortmatrices.h: contine un subprogram care sorteaza matricile din vectorul de
+matrici dupa suma lor
+
+transpose.h: calculeaza transpusa unei matrici cu ajutorul unei matrici
+temporare si se elibereaza cea initiala urmand ca apoi aceasta sa fie alocata
+dinamic in memorie cu noile dimensiuni si sa aiba valorile matricii temp.
+La final temp este eliberata din memorie fiindca nu ne mai trebuie.
+
+product.h: contine un subprogram care returneaza produsul a doua matrici.
+
+multiplymatrix.h: contine un subprogram de tip void care calculeaza produsul
+a doua matrici.
+
+matrixpower.h: aloc dinamic o matrice result cu aceeași dimensiune ca si
+matricea pe care vreau sa o ridic la putere, care la inceput este In,matricea
+identitate.
+Această matrice va stoca rezultatul final al ridicării la putere.
+Aloc dinamic o matrice basecopy copiez elementele matricei de bază în aceasta.
+Verific paritate puterii mele.
+Daca puterea este impara, înmultesc matricea result cu basecopy.
+Daca puterea este para,basecopy este înmulțită cu ea însăși în fiecare pas.
+Actualizez matricea mea initiala cu rezultatul final si eliberez din memorie
+matricile temporare.
+
+R_ok.h: contine un subprogram care verifica daca o matrice se poate ridica la
+putere.
+In caz de nu exista se va afisa "No matrix with the given index"
+In caz de exista dar nu este patratica se va afisa "Cannot perform matrix
+multiplication"
+In caz de exista se va apela subprogramul matrixpower care apartine fisierului
+header matrixpower.h
+
+command_F.h: elibereaza din memorie cea de-a nr matrice si muta matricile
+din dreapta ei cu o pozitie la stanga.
+
+add.h: contine un subprogram care returneaza suma a doua matrici
+
+sub.h: contine un subprogram care returneaza diferenta a doua matrici
+
+strassen.h: contine un subprogram care returneaza produsul strassen a doua
+matrici patratice.
+Verific daca n==1 atunci returnez A[0][0]*B[0][0].
+Altfel aloc dinamic cele 8 matrici de care am nevoie pentru a obtine cele
+7 matrici care conduc spre rezultatul final.
+Prin recursivitate calculez P1, P2, P3, P4, P5, P6, P7 care ma ajuta in a
+obtine matricea rezultat C.
+P1 este (A11 + A22)(B11 + B22).
+P2 este B11(A21 + A22)
+P3 este A11(B12 - B22)
+P4 este A22(B21 - B11)
+P5 este (A11 + A12)B22
+P6 este (A21 - A11)(B11 + B12)
+P7 este (A12 - A22)(B21 + B22)
+Vom exprima matricea C in functie de blocurile C11 C12 C21 si C22
+C11 este P1+P4-P5+P7
+C12 este P3+P5
+C21 este P2+P4
+C22 este P1-P2+P3+P6.
+La final se va returna matricea C.
+
+okstrassen.h: contine un subprogram care verifica daca exista indicii
+matricilor pentru care se doreste sa se faca inmultirea strassen.
+In caz de unul din ei nu exista atunci se va afisa "No matrix with the given
+index".
+Daca matricile exista dar nu au aceleasi dimensiuni atunci se va afisa "Cannot
+perform matrix multiplication".
+Nu in ultimul rand, exista matricile in vector si au dimensiunile egale si sunt
+patratice atunci se va apela subprogramul strassen pentru a se realiza produsul
+
+command_Q.h: contine un subprogram care elibereaza din memorie vectorii
+care retin dimensiunile matricilor din vectorul de matrici si elibereaza
+de asemenea si vectorul de matrici.
+
+# Main-ul
+
+Aloc dinamic in memorie un vector tridimensional mem de capacitate 2 initial.
+Intr-un while citesc variabila command care indica comanda pentru prelucrarea
+matricilor.
+Atunci cand este citit Q-ul, se executa eliberare tuturor resurselor si se
+incheie citirea.
+
+Daca command==L atunci citesc m si n care retin dimensiunile matricii.
+Daca ind care retine numarul matricii actual este egal cu cap care reprezinta
+capacitatea vectorului de matrici atunci dublez cap-ul si realoc in memorie
+vectorul.
+Dupa aceea aloc in memorie dinamic doi vectori v si u care retin dimensiunile
+matricilor din vector.
+Aloc apoi dinamic memorie pentru matricea mem[ind] pe care apoi o citesc.
+Cresc ind-ul pentru a indica ca ma duc spre o alta zona a memoriei.
+
+Daca command==D atunci citesc un nr care reprezinta numarul matricii pentru
+care vreau sa afisez dimensiunile.
+Apelez apoi subprogramul command_D ce apartine se fisierul header command_D.header
+
+Daca command==P atunci citesc un nr cu aceeasi semnificatie ca la command==D.
+Apelez apoi subprogramul command_P ce apartine se fisierul header command_P.header
+
+Daca command==T atunci citesc un nr cu aceeasi semnificatie ca la command==D.
+Verific daca nr e mai mare sau egal decat 0 si mai mic decat ind.
+In caz afirmativ apelez subprogramul tranpose.
+Altfel, afisez "No matrix with the given index"
+
+Daca command==M atunci citesc p1 si p2 care reprezinta indecsii matricilor
+pentru care doresc sa fac produsul.
+Verific intai daca exista matricile respective in memorie.
+Daca nu, afisez "No matrix with the given index".
+In caz de exista dar numarul de coloane al primei matrici nu este egal cu
+numarul de linii al celei de a doua atunci afisez "Cannot perform matrix
+multiplication".
+In caz de exista si are loc egalitatea dintre numarul de coloane al primei
+matrici si numarul de linii al celei de a doua matrici, atunci fac urmatoarele
+prelucrari:
+-verific daca se ajunge la capacitatea maxima pentru alocarea matricii rezultat.
+In caz afirmativ inmultesc cu 2 capacitatea si realoc dinamic in memorie
+dimensiunea vectorului de matrici.
+-aloc dinamic in memorie matricea rezultat in mem[ind]
+-adaug in vectorii de dimensiuni, nr de linii si nr de coloane al matricii
+rezultat.
+
+Daca command==O atunci apelez subprogramul sortmatrices pentru a sorta
+matricile din vector in functie de suma.
+
+Daca command==C citesc indexul matricii pentru care vreau sa redimensionez si
+apoi apelez subprogramul command_C pentru a face prelucrarile necesare.
+
+Daca command==R atunci citesc indexul matricii pentru care vreau sa ridica
+la putere si apoi puterea care este retinuta in put.
+Apoi apelez subprogramul R_ok.
+
+Daca command==F atunci citesc indexul matricii pe care vreau sa o eliberez din
+memorie.
+Verific intai daca exista.
+Daca nu, afisez "No matrix with the given index".
+Altfel apelez subprogramul command_F eliberez matricea respectiva
+din memorie si apoi verific daca numarul matricilor alocate este <= cu cap,
+adica capacitatea vectorului de matrici, atunci injumatatesc cap-ul si realoc
+in memorie dupa noul cap.
+
+Daca command==S citesc indecsii celor doua matrici pe care vreau sa le
+inmultesc si apoi apelez subprogramul okstrassen.
+
+Daca command==Q atunci apelez subprogramul command_Q pentru a elibera din
+memorie toate resursele.
+Dupa ce a avut loc eliberarea, citirea se incheie.
+
+
